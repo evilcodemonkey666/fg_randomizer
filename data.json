@@ -20,8 +20,11 @@
     { "id": "s3_tormentor", "name": "The Marrek Murders", "killers": ["The Tormentor"], "locations": ["Marrek Warehouse"], "girls": ["Mandy", "Cassie"] },
     { "id": "s3_eyeless", "name": "Don't Make a Sound", "killers": ["The Eyeless"], "locations": ["Utopia"], "girls": ["Meghan", "Ronda"] }
   ],
-  "Special Vignettes": [
+  "Special Feature Films": [
     { "id": "sp_krampus", "name": "North Pole Nightmare", "killers": ["Krampus"], "locations": ["Santa's Village"], "girls": ["Mrs. Claus", "Cindy"] },
+    { "id": "sp_shriek", "name": "Final Girl: Shriek", "killers": ["The Face"], "locations": ["Oakhaven"], "girls": ["Sidney", "Gale"] }
+  ],
+  "Special Vignettes": [
     { "id": "v_birds", "name": "Terror from Above (S1)", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
     { "id": "v_zombies", "name": "Terror from the Grave (S2)", "killers": ["Zombies"], "locations": [], "girls": [] },
     { "id": "v_destiny", "name": "Terror From Destiny (S3)", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
