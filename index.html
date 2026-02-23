@@ -3,361 +3,193 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Final Girl: The Ultimate Randomizer</title>
+    <title>Final Girl Randomizer</title>
     <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --blood-red: #8b0000;
-            --bright-red: #ff4d4d;
-            --dark-bg: #0a0a0a;
-            --card-bg: #1a1a1a;
-            --text-gray: #cccccc;
-            --gold: #ffd700;
-        }
-
-        body {
-            font-family: 'Roboto', sans-serif;
-            background-color: var(--dark-bg);
-            color: white;
-            margin: 0;
-            padding: 10px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
+        :root { --blood: #8b0000; --bright: #ff4d4d; --bg: #0a0a0a; --card: #1a1a1a; --gold: #ffd700; }
+        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: white; margin: 0; padding: 15px; display: flex; flex-direction: column; align-items: center; }
         .container { max-width: 900px; width: 100%; }
+        h1 { font-family: 'Nosifer', cursive; color: var(--blood); text-align: center; margin: 10px 0; font-size: 2.5rem; }
+        
+        /* Result Display */
+        .results { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .card { background: var(--card); border: 2px solid var(--blood); border-radius: 10px; padding: 20px; text-align: center; box-shadow: 0 10px 20px rgba(0,0,0,0.5); }
+        .card i { font-size: 2.5rem; display: block; margin-bottom: 10px; }
+        .val { font-size: 1.5rem; font-weight: 900; color: var(--bright); margin: 5px 0; min-height: 1.8rem; transition: opacity 0.2s; }
+        .origin { font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
 
-        h1 { 
-            font-family: 'Nosifer', cursive; 
-            color: var(--blood-red); 
-            text-align: center; 
-            font-size: clamp(1.5rem, 5vw, 3rem);
-            margin-bottom: 10px;
-            text-shadow: 2px 2px 4px black;
-        }
+        /* Buttons */
+        #roll-btn { background: var(--blood); color: white; border: none; width: 100%; padding: 20px; font-size: 1.5rem; font-weight: 900; border-radius: 50px; cursor: pointer; margin-bottom: 30px; box-shadow: 0 0 15px rgba(139,0,0,0.5); transition: 0.2s; }
+        #roll-btn:hover { background: var(--bright); transform: scale(1.02); }
+        .sel-btn { background: #333; color: #ccc; border: 1px solid #444; padding: 4px 10px; font-size: 0.7rem; border-radius: 4px; cursor: pointer; margin-left: 10px; }
+        .sel-btn:hover { background: #444; color: white; }
 
-        .subtitle { text-align: center; color: var(--text-gray); margin-bottom: 30px; font-style: italic; }
+        /* Sections */
+        details { background: var(--card); border: 1px solid #333; margin-bottom: 10px; border-radius: 5px; }
+        summary { padding: 15px; cursor: pointer; font-weight: bold; display: flex; align-items: center; justify-content: space-between; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; padding: 15px; border-top: 1px solid #333; }
+        .item { display: flex; align-items: center; font-size: 0.85rem; background: #111; padding: 8px; border-radius: 4px; cursor: pointer; }
+        .item input { margin-right: 10px; accent-color: var(--bright); }
 
-        /* Results Display */
-        .results-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .result-card {
-            background: linear-gradient(145deg, #222, #111);
-            border: 2px solid var(--blood-red);
-            border-radius: 12px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.8);
-            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .result-card:hover { transform: scale(1.02); }
-        .result-icon { font-size: 3rem; margin-bottom: 10px; display: block; }
-        .result-label { color: var(--text-gray); text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px; }
-        .result-value { font-size: 1.6rem; font-weight: 900; margin: 10px 0; color: var(--bright-red); }
-        .result-origin { font-size: 0.85rem; color: var(--gold); border-top: 1px solid #333; pt: 10px; margin-top: 10px; padding-top: 10px; }
-
-        /* Controls */
-        button#main-btn {
-            background: var(--blood-red);
-            color: white;
-            border: none;
-            padding: 20px;
-            width: 100%;
-            font-size: 1.5rem;
-            font-weight: 900;
-            border-radius: 50px;
-            cursor: pointer;
-            box-shadow: 0 5px 15px rgba(139, 0, 0, 0.4);
-            margin-bottom: 40px;
-            text-transform: uppercase;
-        }
-
-        button#main-btn:active { transform: translateY(3px); box-shadow: none; }
-
-        /* Expandable Sections */
-        details {
-            background: var(--card-bg);
-            border-radius: 8px;
-            margin-bottom: 10px;
-            overflow: hidden;
-            border: 1px solid #333;
-        }
-
-        summary {
-            padding: 15px;
-            cursor: pointer;
-            font-weight: bold;
-            background: #252525;
-            list-style: none;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        summary::-webkit-details-marker { display: none; }
-        summary::after { content: '▼'; font-size: 0.8rem; }
-
-        .expansion-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 10px;
-            padding: 15px;
-        }
-
-        .film-checkbox {
-            display: flex;
-            align-items: center;
-            font-size: 0.9rem;
-            background: #111;
-            padding: 8px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .film-checkbox input { margin-right: 10px; accent-color: var(--bright-red); }
-
-        /* Custom Editor */
-        .editor-input-group {
-            display: flex;
-            gap: 5px;
-            padding: 15px;
-        }
-
-        input[type="text"], select {
-            background: #000;
-            border: 1px solid #444;
-            color: white;
-            padding: 10px;
-            border-radius: 4px;
-        }
-
-        .custom-list {
-            padding: 0 15px 15px 15px;
-            max-height: 200px;
-            overflow-y: auto;
-        }
-
-        .custom-item {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            padding: 5px 0;
-            border-bottom: 1px solid #222;
-        }
-
-        .delete-btn { color: var(--bright-red); cursor: pointer; font-weight: bold; }
+        /* Custom Section */
+        .custom-row { display: flex; gap: 5px; padding: 15px; }
+        input[type="text"], select { background: #000; border: 1px solid #444; color: white; padding: 10px; border-radius: 4px; }
     </style>
 </head>
 <body>
 
 <div class="container">
     <h1>FINAL GIRL</h1>
-    <div class="subtitle">Season Selection Randomizer</div>
-
-    <!-- MAIN RESULTS -->
-    <div class="results-container">
-        <div class="result-card" id="card-killer">
-            <span class="result-icon">🪓</span>
-            <div class="result-label">The Killer</div>
-            <div class="result-value" id="resKiller">???</div>
-            <div class="result-origin" id="oriKiller">Select films below</div>
-        </div>
-        <div class="result-card" id="card-location">
-            <span class="result-icon">🏚️</span>
-            <div class="result-label">The Location</div>
-            <div class="result-value" id="resLocation">???</div>
-            <div class="result-origin" id="oriLocation">to begin</div>
-        </div>
-        <div class="result-card" id="card-girl">
-            <span class="result-icon">🏃‍♀️</span>
-            <div class="result-label">The Final Girl</div>
-            <div class="result-value" id="resGirl">???</div>
-            <div class="result-origin" id="oriGirl">your survival</div>
-        </div>
+    
+    <div class="results">
+        <div class="card"><i id="icon-k">🪓</i><div class="origin" id="oriK">Killer</div><div class="val" id="resK">???</div></div>
+        <div class="card"><i id="icon-l">🏚️</i><div class="origin" id="oriL">Location</div><div class="val" id="resL">???</div></div>
+        <div class="card"><i id="icon-g">🏃‍♀️</i><div class="origin" id="oriG">Final Girl</div><div class="val" id="resG">???</div></div>
     </div>
 
-    <button id="main-btn">ROLL FOR SURVIVAL</button>
+    <button id="roll-btn">ROLL FOR SURVIVAL</button>
 
-    <!-- CONFIGURATION -->
-    <details open>
-        <summary>SERIES 1: THE CLASSICS</summary>
-        <div class="expansion-grid" id="grid-s1"></div>
-    </details>
-
-    <details open>
-        <summary>SERIES 2: THE SEQUELS</summary>
-        <div class="expansion-grid" id="grid-s2"></div>
-    </details>
-
-    <details open>
-        <summary>SERIES 3: THE LATEST FRIGHTS</summary>
-        <div class="expansion-grid" id="grid-s3"></div>
-    </details>
+    <div id="dynamic-sections">
+        <!-- JSON content will load here -->
+    </div>
 
     <details>
-        <summary>VIGNETTES & PROMOS</summary>
-        <div class="expansion-grid" id="grid-sp"></div>
-    </details>
-
-    <details>
-        <summary>CUSTOM CONTENT / ADD-ONS</summary>
-        <div class="editor-input-group">
-            <input type="text" id="customName" placeholder="Name..." style="flex:2">
-            <select id="customType">
+        <summary>MANAGE CUSTOM CONTENT</summary>
+        <div class="custom-row">
+            <input type="text" id="custName" placeholder="Name..." style="flex:2">
+            <select id="custType">
                 <option value="killers">Killer</option>
                 <option value="locations">Location</option>
                 <option value="girls">Girl</option>
             </select>
             <button onclick="addCustom()">ADD</button>
         </div>
-        <div class="custom-list" id="customDisplay"></div>
+        <div id="custDisplay" style="padding:0 15px 15px 15px; font-size: 0.8rem;"></div>
     </details>
 </div>
 
 <script>
-    const data = {
-        s1: [
-            { id: "s1_hans", name: "The Happy Trails Horror", killers: ["Hans"], locations: ["Camp Happy Trails"], girls: ["Laurie", "Reiko"] },
-            { id: "s1_poltergeist", name: "The Haunting of Creech Manor", killers: ["The Poltergeist"], locations: ["Creech Manor"], girls: ["Alice", "Selena"] },
-            { id: "s1_ink", name: "Slaughter in the Groves", killers: ["Inkanyamba"], locations: ["Sacred Groves"], girls: ["Adelaide", "Barbara"] },
-            { id: "s1_gepetto", name: "Carnage at the Carnival", killers: ["Geppetto"], locations: ["Carnival of Blood"], girls: ["Asami", "Charlie"] },
-            { id: "s1_fright", name: "Frightmare on Maple Lane", killers: ["Dr. Fright"], locations: ["Maple Lane"], girls: ["Nancy", "Sheila"] }
-        ],
-        s2: [
-            { id: "s2_evo", name: "Into the Void", killers: ["The Evomorph"], locations: ["USS Konrad"], girls: ["Ellen", "Jeanette"] },
-            { id: "s2_org", name: "Panic at Station 2891", killers: ["The Organism"], locations: ["Station 2891"], girls: ["Kate", "Moriko"] },
-            { id: "s2_intruders", name: "A Knock at the Door", killers: ["The Intruders"], locations: ["Wingard Cottage"], girls: ["Ginny", "Ava"] },
-            { id: "s2_wolf", name: "Once Upon a Full Moon", killers: ["Big Bad Wolf"], locations: ["Storybook Woods"], girls: ["Red", "Gretel"] },
-            { id: "s2_ratchet", name: "Madness in the Dark", killers: ["The Ratchet Lady"], locations: ["Wolfe Asylum"], girls: ["Heather", "Veronica"] }
-        ],
-        s3: [
-            { id: "s3_hunter", name: "The Killer from Tomorrow", killers: ["The H.U.N.T.E.R."], locations: ["Sunnydaze Mall"], girls: ["Kat", "Tali"] },
-            { id: "s3_razor", name: "Hell to Pay", killers: ["Razorface"], locations: ["Hellscape"], girls: ["Christie", "Kenzie"] },
-            { id: "s3_slayer", name: "The Falconwood Files", killers: ["Slayer"], locations: ["Falconwood"], girls: ["Octavia", "Janelle"] },
-            { id: "s3_tormentor", name: "The Marrek Murders", killers: ["The Tormentor"], locations: ["Marrek Warehouse"], girls: ["Mandy", "Cassie"] },
-            { id: "s3_eyeless", name: "Don't Make a Sound", killers: ["The Eyeless"], locations: ["Utopia"], girls: ["Meghan", "Ronda"] }
-        ],
-        sp: [
-            { id: "sp_krampus", name: "North Pole Nightmare", killers: ["Krampus"], locations: ["Santa's Village"], girls: ["Mrs. Claus", "Cindy"] },
-            { id: "v_birds", name: "Terror from Above", killers: ["The Birds"], locations: [], girls: ["Melanie"] },
-            { id: "v_zombies", name: "Terror from the Grave", killers: ["Zombies"], locations: [], girls: [] },
-            { id: "v_destiny", name: "Terror From Destiny", killers: ["Destiny"], locations: [], girls: [] },
-            { id: "extras", name: "Promos/Bonus", killers: [], locations: [], girls: ["Paula", "Agnes", "Layla", "Jamie", "Carolyn", "Barbara"] }
-        ]
-    };
+    let filmData = {};
+    let state = JSON.parse(localStorage.getItem('fg_v3_state')) || { owned: [], custom: { killers: [], locations: [], girls: [] } };
 
-    let state = JSON.parse(localStorage.getItem('fg_v2_state')) || {
-        owned: ["s1_hans", "s1_poltergeist", "s1_ink", "s1_gepetto", "s1_fright", "s2_evo", "s2_org", "s2_intruders", "s2_wolf", "s2_ratchet"],
-        custom: { killers: [], locations: [], girls: [] }
-    };
+    async function loadData() {
+        try {
+            const response = await fetch('data.json');
+            filmData = await response.json();
+            renderUI();
+        } catch (e) {
+            alert("Error loading data.json. Make sure you are running this on a local server or uploading to a host.");
+            console.error(e);
+        }
+    }
 
-    function save() { localStorage.setItem('fg_v2_state', JSON.stringify(state)); }
+    function renderUI() {
+        const container = document.getElementById('dynamic-sections');
+        container.innerHTML = '';
 
-    function renderCheckboxes() {
-        ['s1', 's2', 's3', 'sp'].forEach(series => {
-            const container = document.getElementById(`grid-${series}`);
-            container.innerHTML = '';
-            data[series].forEach(film => {
+        Object.keys(filmData).forEach(seriesName => {
+            const det = document.createElement('details');
+            det.open = true;
+            
+            const sum = document.createElement('summary');
+            sum.innerHTML = `<span>${seriesName}</span>`;
+            
+            const btnGroup = document.createElement('div');
+            const btnAll = document.createElement('button');
+            btnAll.className = 'sel-btn';
+            btnAll.innerText = 'SELECT ALL';
+            btnAll.onclick = (e) => { e.preventDefault(); toggleSeries(seriesName, true); };
+            
+            const btnNone = document.createElement('button');
+            btnNone.className = 'sel-btn';
+            btnNone.innerText = 'NONE';
+            btnNone.onclick = (e) => { e.preventDefault(); toggleSeries(seriesName, false); };
+
+            btnGroup.append(btnAll, btnNone);
+            sum.appendChild(btnGroup);
+            
+            const grid = document.createElement('div');
+            grid.className = 'grid';
+
+            filmData[seriesName].forEach(film => {
                 const label = document.createElement('label');
-                label.className = 'film-checkbox';
+                label.className = 'item';
                 const checked = state.owned.includes(film.id) ? 'checked' : '';
-                label.innerHTML = `<input type="checkbox" value="${film.id}" ${checked}> ${film.name}`;
-                label.querySelector('input').addEventListener('change', (e) => {
+                label.innerHTML = `<input type="checkbox" data-id="${film.id}" ${checked}> ${film.name}`;
+                label.querySelector('input').onchange = (e) => {
                     if(e.target.checked) state.owned.push(film.id);
                     else state.owned = state.owned.filter(id => id !== film.id);
                     save();
-                });
-                container.appendChild(label);
+                };
+                grid.appendChild(label);
             });
+
+            det.append(sum, grid);
+            container.appendChild(det);
         });
+        renderCustom();
+    }
+
+    function toggleSeries(seriesName, val) {
+        filmData[seriesName].forEach(film => {
+            state.owned = state.owned.filter(id => id !== film.id);
+            if(val) state.owned.push(film.id);
+        });
+        save();
+        renderUI(); // Refresh checkboxes
+    }
+
+    function addCustom() {
+        const n = document.getElementById('custName').value;
+        const t = document.getElementById('custType').value;
+        if(n) { state.custom[t].push(n); save(); renderCustom(); document.getElementById('custName').value = ''; }
     }
 
     function renderCustom() {
-        const div = document.getElementById('customDisplay');
-        div.innerHTML = '';
-        ['killers', 'locations', 'girls'].forEach(type => {
-            state.custom[type].forEach((name, i) => {
-                div.innerHTML += `<div class="custom-item">
-                    <span><strong>${type.toUpperCase()}:</strong> ${name}</span>
-                    <span class="delete-btn" onclick="removeCustom('${type}', ${i})">REMOVE</span>
+        const d = document.getElementById('custDisplay');
+        d.innerHTML = '';
+        ['killers', 'locations', 'girls'].forEach(t => {
+            state.custom[t].forEach((name, i) => {
+                d.innerHTML += `<div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                    <span>${t.toUpperCase()}: ${name}</span>
+                    <span style="color:red; cursor:pointer;" onclick="state.custom['${t}'].splice(${i},1); save(); renderCustom();">REMOVE</span>
                 </div>`;
             });
         });
     }
 
-    function addCustom() {
-        const name = document.getElementById('customName').value.trim();
-        const type = document.getElementById('customType').value;
-        if(name) {
-            state.custom[type].push(name);
-            document.getElementById('customName').value = '';
-            renderCustom();
-            save();
-        }
-    }
-
-    function removeCustom(type, i) {
-        state.custom[type].splice(i, 1);
-        renderCustom();
-        save();
-    }
+    function save() { localStorage.setItem('fg_v3_state', JSON.stringify(state)); }
 
     function roll() {
         let pool = { killers: [], locations: [], girls: [] };
-
-        // Add defaults based on selection
-        Object.keys(data).forEach(key => {
-            data[key].forEach(film => {
-                if(state.owned.includes(film.id)) {
-                    film.killers.forEach(k => pool.killers.push({name: k, from: film.name}));
-                    film.locations.forEach(l => pool.locations.push({name: l, from: film.name}));
-                    film.girls.forEach(g => pool.girls.push({name: g, from: film.name}));
-                }
-            });
+        
+        // Add from JSON
+        Object.values(filmData).flat().forEach(film => {
+            if(state.owned.includes(film.id)) {
+                film.killers.forEach(x => pool.killers.push({n: x, f: film.name}));
+                film.locations.forEach(x => pool.locations.push({n: x, f: film.name}));
+                film.girls.forEach(x => pool.girls.push({n: x, f: film.name}));
+            }
         });
 
-        // Add customs
-        state.custom.killers.forEach(k => pool.killers.push({name: k, from: "Custom Content"}));
-        state.custom.locations.forEach(l => pool.locations.push({name: l, from: "Custom Content"}));
-        state.custom.girls.forEach(g => pool.girls.push({name: g, from: "Custom Content"}));
+        // Add Custom
+        ['killers', 'locations', 'girls'].forEach(t => {
+            state.custom[t].forEach(x => pool[t].push({n: x, f: "Custom Content"}));
+        });
 
-        const pick = (arr) => arr.length ? arr[Math.floor(Math.random() * arr.length)] : {name: "N/A", from: "Check settings"};
-
+        const pick = (arr) => arr.length ? arr[Math.floor(Math.random() * arr.length)] : {n: "---", f: "Check Filters"};
+        
         const k = pick(pool.killers);
         const l = pick(pool.locations);
         const g = pick(pool.girls);
 
-        // Update UI
-        updateEl('resKiller', 'oriKiller', k);
-        updateEl('resLocation', 'oriLocation', l);
-        updateEl('resGirl', 'oriGirl', g);
+        document.getElementById('resK').innerText = k.n; document.getElementById('oriK').innerText = k.f;
+        document.getElementById('resL').innerText = l.n; document.getElementById('oriL').innerText = l.f;
+        document.getElementById('resG').innerText = g.n; document.getElementById('oriG').innerText = g.f;
     }
 
-    function updateEl(valId, oriId, obj) {
-        const valEl = document.getElementById(valId);
-        const oriEl = document.getElementById(oriId);
-        
-        // Flicker effect
-        valEl.style.opacity = 0;
-        setTimeout(() => {
-            valEl.innerText = obj.name;
-            oriEl.innerText = "🎬 " + obj.from;
-            valEl.style.opacity = 1;
-        }, 150);
-    }
-
-    document.getElementById('main-btn').addEventListener('click', roll);
-
-    // Init
-    renderCheckboxes();
-    renderCustom();
+    document.getElementById('roll-btn').onclick = roll;
+    loadData();
 </script>
-
 </body>
 </html>
