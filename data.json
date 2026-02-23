@@ -1,32 +1,32 @@
 {
-  "Series 1: The Classics": [
-    { "id": "s1_hans", "name": "The Happy Trails Horror", "killers": ["Hans"], "locations": ["Camp Happy Trails"], "girls": ["Laurie", "Reiko"] },
-    { "id": "s1_poltergeist", "name": "The Haunting of Creech Manor", "killers": ["The Poltergeist"], "locations": ["Creech Manor"], "girls": ["Alice", "Selena"] },
-    { "id": "s1_ink", "name": "Slaughter in the Groves", "killers": ["Inkanyamba"], "locations": ["Sacred Groves"], "girls": ["Adelaide", "Barbara"] },
-    { "id": "s1_gepetto", "name": "Carnage at the Carnival", "killers": ["Geppetto"], "locations": ["Carnival of Blood"], "girls": ["Asami", "Charlie"] },
-    { "id": "s1_fright", "name": "Frightmare on Maple Lane", "killers": ["Dr. Fright"], "locations": ["Maple Lane"], "girls": ["Nancy", "Sheila"] }
+  "Season 1": [
+    { "id": "s1_hans", "name": "The Happy Trails Horror", "season": "1", "killers": ["Hans"], "locations": ["Camp Happy Trails"], "girls": ["Laurie", "Reiko"] },
+    { "id": "s1_poltergeist", "name": "The Haunting of Creech Manor", "season": "1", "killers": ["The Poltergeist"], "locations": ["Creech Manor"], "girls": ["Alice", "Selena"] },
+    { "id": "s1_ink", "name": "Slaughter in the Groves", "season": "1", "killers": ["Inkanyamba"], "locations": ["Sacred Groves"], "girls": ["Adelaide", "Barbara"] },
+    { "id": "s1_gepetto", "name": "Carnage at the Carnival", "season": "1", "killers": ["Geppetto"], "locations": ["Carnival of Blood"], "girls": ["Asami", "Charlie"] },
+    { "id": "s1_fright", "name": "Frightmare on Maple Lane", "season": "1", "killers": ["Dr. Fright"], "locations": ["Maple Lane"], "girls": ["Nancy", "Sheila"] }
   ],
-  "Series 2: The Sequels": [
-    { "id": "s2_evo", "name": "Into the Void", "killers": ["The Evomorph"], "locations": ["USS Konrad"], "girls": ["Ellen", "Jeanette"] },
-    { "id": "s2_org", "name": "Panic at Station 2891", "killers": ["The Organism"], "locations": ["Station 2891"], "girls": ["Kate", "Moriko"] },
-    { "id": "s2_intruders", "name": "A Knock at the Door", "killers": ["The Intruders"], "locations": ["Wingard Cottage"], "girls": ["Ginny", "Ava"] },
-    { "id": "s2_wolf", "name": "Once Upon a Full Moon", "killers": ["Big Bad Wolf"], "locations": ["Storybook Woods"], "girls": ["Red", "Gretel"] },
-    { "id": "s2_ratchet", "name": "Madness in the Dark", "killers": ["The Ratchet Lady"], "locations": ["Wolfe Asylum"], "girls": ["Heather", "Veronica"] }
+  "Season 2": [
+    { "id": "s2_evo", "name": "Into the Void", "season": "2", "killers": ["The Evomorph"], "locations": ["USS Konrad"], "girls": ["Ellen", "Jeanette"] },
+    { "id": "s2_org", "name": "Panic at Station 2891", "season": "2", "killers": ["The Organism"], "locations": ["Station 2891"], "girls": ["Kate", "Moriko"] },
+    { "id": "s2_intruders", "name": "A Knock at the Door", "season": "2", "killers": ["The Intruders"], "locations": ["Wingard Cottage"], "girls": ["Ginny", "Ava"] },
+    { "id": "s2_wolf", "name": "Once Upon a Full Moon", "season": "2", "killers": ["Big Bad Wolf"], "locations": ["Storybook Woods"], "girls": ["Red", "Gretel"] },
+    { "id": "s2_ratchet", "name": "Madness in the Dark", "season": "2", "killers": ["The Ratchet Lady"], "locations": ["Wolfe Asylum"], "girls": ["Heather", "Veronica"] }
   ],
-  "Series 3: The Latest Frights": [
-    { "id": "s3_hunter", "name": "The Killer from Tomorrow", "killers": ["The H.U.N.T.E.R."], "locations": ["Sunnydaze Mall"], "girls": ["Kat", "Tali"] },
-    { "id": "s3_razor", "name": "Hell to Pay", "killers": ["Razorface"], "locations": ["Hellscape"], "girls": ["Christie", "Kenzie"] },
-    { "id": "s3_slayer", "name": "The Falconwood Files", "killers": ["Slayer"], "locations": ["Falconwood"], "girls": ["Octavia", "Janelle"] },
-    { "id": "s3_tormentor", "name": "The Marrek Murders", "killers": ["The Tormentor"], "locations": ["Marrek Warehouse"], "girls": ["Mandy", "Cassie"] },
-    { "id": "s3_eyeless", "name": "Don't Make a Sound", "killers": ["The Eyeless"], "locations": ["Utopia"], "girls": ["Meghan", "Ronda"] }
+  "Season 3": [
+    { "id": "s3_hunter", "name": "The Killer from Tomorrow", "season": "3", "killers": ["The H.U.N.T.E.R."], "locations": ["Sunnydaze Mall"], "girls": ["Kat", "Tali"] },
+    { "id": "s3_razor", "name": "Hell to Pay", "season": "3", "killers": ["Razorface"], "locations": ["Hellscape"], "girls": ["Christie", "Kenzie"] },
+    { "id": "s3_slayer", "name": "The Falconwood Files", "season": "3", "killers": ["Slayer"], "locations": ["Falconwood"], "girls": ["Octavia", "Janelle"] },
+    { "id": "s3_tormentor", "name": "The Marrek Murders", "season": "3", "killers": ["The Tormentor"], "locations": ["Marrek Warehouse"], "girls": ["Mandy", "Cassie"] },
+    { "id": "s3_eyeless", "name": "Don't Make a Sound", "season": "3", "killers": ["The Eyeless"], "locations": ["Utopia"], "girls": ["Meghan", "Ronda"] }
   ],
   "Special Feature Films": [
-    { "id": "sp_krampus", "name": "North Pole Nightmare", "killers": ["Krampus"], "locations": ["Santa's Village"], "girls": ["Mrs. Claus", "Cindy"] },
-    { "id": "sp_shriek", "name": "Final Girl: Shriek", "killers": ["The Face"], "locations": ["Oakhaven"], "girls": ["Sidney", "Gale"] }
+    { "id": "sp_krampus", "name": "North Pole Nightmare", "season": "2 Special", "killers": ["Krampus"], "locations": ["Santa's Village"], "girls": ["Mrs. Claus", "Cindy"] },
+    { "id": "sp_shriek", "name": "Final Girl: Shriek", "season": "3 Special", "killers": ["The Face"], "locations": ["Oakhaven"], "girls": ["Sidney", "Gale"] }
   ],
   "Special Vignettes": [
-    { "id": "v_birds", "name": "Terror from Above (S1)", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
-    { "id": "v_zombies", "name": "Terror from the Grave (S2)", "killers": ["Zombies"], "locations": [], "girls": [] },
-    { "id": "v_destiny", "name": "Terror From Destiny (S3)", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
+    { "id": "v_birds", "name": "Terror from Above", "season": "1 Vignette", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
+    { "id": "v_zombies", "name": "Terror from the Grave", "season": "2 Vignette", "killers": ["Zombies"], "locations": [], "girls": [] },
+    { "id": "v_destiny", "name": "Terror From Destiny", "season": "3 Vignette", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
   ]
 }
