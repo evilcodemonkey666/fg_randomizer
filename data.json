@@ -28,5 +28,5 @@
     { "id": "v_birds", "name": "Terror from Above (S1)", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
     { "id": "v_zombies", "name": "Terror from the Grave (S2)", "killers": ["Zombies"], "locations": [], "girls": [] },
     { "id": "v_destiny", "name": "Terror From Destiny (S3)", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
-  ],
+  ]
 }
