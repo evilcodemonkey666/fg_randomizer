@@ -22,8 +22,8 @@
   ],
   "Special Vignettes": [
     { "id": "sp_krampus", "name": "North Pole Nightmare", "killers": ["Krampus"], "locations": ["Santa's Village"], "girls": ["Mrs. Claus", "Cindy"] },
-    { "id": "v_birds", "name": "Terror from Above", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
-    { "id": "v_zombies", "name": "Terror from the Grave", "killers": ["Zombies"], "locations": [], "girls": [] },
-    { "id": "v_destiny", "name": "Terror From Destiny", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
+    { "id": "v_birds", "name": "Terror from Above (S1)", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
+    { "id": "v_zombies", "name": "Terror from the Grave (S2)", "killers": ["Zombies"], "locations": [], "girls": [] },
+    { "id": "v_destiny", "name": "Terror From Destiny (S3)", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
   ],
 }
