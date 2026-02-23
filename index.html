@@ -168,4 +168,196 @@
             <div class="result-value" id="resKiller">???</div>
             <div class="result-origin" id="oriKiller">Select films below</div>
         </div>
-        <div class="result-car
+        <div class="result-card" id="card-location">
+            <span class="result-icon">🏚️</span>
+            <div class="result-label">The Location</div>
+            <div class="result-value" id="resLocation">???</div>
+            <div class="result-origin" id="oriLocation">to begin</div>
+        </div>
+        <div class="result-card" id="card-girl">
+            <span class="result-icon">🏃‍♀️</span>
+            <div class="result-label">The Final Girl</div>
+            <div class="result-value" id="resGirl">???</div>
+            <div class="result-origin" id="oriGirl">your survival</div>
+        </div>
+    </div>
+
+    <button id="main-btn">ROLL FOR SURVIVAL</button>
+
+    <!-- CONFIGURATION -->
+    <details open>
+        <summary>SERIES 1: THE CLASSICS</summary>
+        <div class="expansion-grid" id="grid-s1"></div>
+    </details>
+
+    <details open>
+        <summary>SERIES 2: THE SEQUELS</summary>
+        <div class="expansion-grid" id="grid-s2"></div>
+    </details>
+
+    <details open>
+        <summary>SERIES 3: THE LATEST FRIGHTS</summary>
+        <div class="expansion-grid" id="grid-s3"></div>
+    </details>
+
+    <details>
+        <summary>VIGNETTES & PROMOS</summary>
+        <div class="expansion-grid" id="grid-sp"></div>
+    </details>
+
+    <details>
+        <summary>CUSTOM CONTENT / ADD-ONS</summary>
+        <div class="editor-input-group">
+            <input type="text" id="customName" placeholder="Name..." style="flex:2">
+            <select id="customType">
+                <option value="killers">Killer</option>
+                <option value="locations">Location</option>
+                <option value="girls">Girl</option>
+            </select>
+            <button onclick="addCustom()">ADD</button>
+        </div>
+        <div class="custom-list" id="customDisplay"></div>
+    </details>
+</div>
+
+<script>
+    const data = {
+        s1: [
+            { id: "s1_hans", name: "The Happy Trails Horror", killers: ["Hans"], locations: ["Camp Happy Trails"], girls: ["Laurie", "Reiko"] },
+            { id: "s1_poltergeist", name: "The Haunting of Creech Manor", killers: ["The Poltergeist"], locations: ["Creech Manor"], girls: ["Alice", "Selena"] },
+            { id: "s1_ink", name: "Slaughter in the Groves", killers: ["Inkanyamba"], locations: ["Sacred Groves"], girls: ["Adelaide", "Barbara"] },
+            { id: "s1_gepetto", name: "Carnage at the Carnival", killers: ["Geppetto"], locations: ["Carnival of Blood"], girls: ["Asami", "Charlie"] },
+            { id: "s1_fright", name: "Frightmare on Maple Lane", killers: ["Dr. Fright"], locations: ["Maple Lane"], girls: ["Nancy", "Sheila"] }
+        ],
+        s2: [
+            { id: "s2_evo", name: "Into the Void", killers: ["The Evomorph"], locations: ["USS Konrad"], girls: ["Ellen", "Jeanette"] },
+            { id: "s2_org", name: "Panic at Station 2891", killers: ["The Organism"], locations: ["Station 2891"], girls: ["Kate", "Moriko"] },
+            { id: "s2_intruders", name: "A Knock at the Door", killers: ["The Intruders"], locations: ["Wingard Cottage"], girls: ["Ginny", "Ava"] },
+            { id: "s2_wolf", name: "Once Upon a Full Moon", killers: ["Big Bad Wolf"], locations: ["Storybook Woods"], girls: ["Red", "Gretel"] },
+            { id: "s2_ratchet", name: "Madness in the Dark", killers: ["The Ratchet Lady"], locations: ["Wolfe Asylum"], girls: ["Heather", "Veronica"] }
+        ],
+        s3: [
+            { id: "s3_hunter", name: "The Killer from Tomorrow", killers: ["The H.U.N.T.E.R."], locations: ["Sunnydaze Mall"], girls: ["Kat", "Tali"] },
+            { id: "s3_razor", name: "Hell to Pay", killers: ["Razorface"], locations: ["Hellscape"], girls: ["Christie", "Kenzie"] },
+            { id: "s3_slayer", name: "The Falconwood Files", killers: ["Slayer"], locations: ["Falconwood"], girls: ["Octavia", "Janelle"] },
+            { id: "s3_tormentor", name: "The Marrek Murders", killers: ["The Tormentor"], locations: ["Marrek Warehouse"], girls: ["Mandy", "Cassie"] },
+            { id: "s3_eyeless", name: "Don't Make a Sound", killers: ["The Eyeless"], locations: ["Utopia"], girls: ["Meghan", "Ronda"] }
+        ],
+        sp: [
+            { id: "sp_krampus", name: "North Pole Nightmare", killers: ["Krampus"], locations: ["Santa's Village"], girls: ["Mrs. Claus", "Cindy"] },
+            { id: "v_birds", name: "Terror from Above", killers: ["The Birds"], locations: [], girls: ["Melanie"] },
+            { id: "v_zombies", name: "Terror from the Grave", killers: ["Zombies"], locations: [], girls: [] },
+            { id: "v_destiny", name: "Terror From Destiny", killers: ["Destiny"], locations: [], girls: [] },
+            { id: "extras", name: "Promos/Bonus", killers: [], locations: [], girls: ["Paula", "Agnes", "Layla", "Jamie", "Carolyn", "Barbara"] }
+        ]
+    };
+
+    let state = JSON.parse(localStorage.getItem('fg_v2_state')) || {
+        owned: ["s1_hans", "s1_poltergeist", "s1_ink", "s1_gepetto", "s1_fright", "s2_evo", "s2_org", "s2_intruders", "s2_wolf", "s2_ratchet"],
+        custom: { killers: [], locations: [], girls: [] }
+    };
+
+    function save() { localStorage.setItem('fg_v2_state', JSON.stringify(state)); }
+
+    function renderCheckboxes() {
+        ['s1', 's2', 's3', 'sp'].forEach(series => {
+            const container = document.getElementById(`grid-${series}`);
+            container.innerHTML = '';
+            data[series].forEach(film => {
+                const label = document.createElement('label');
+                label.className = 'film-checkbox';
+                const checked = state.owned.includes(film.id) ? 'checked' : '';
+                label.innerHTML = `<input type="checkbox" value="${film.id}" ${checked}> ${film.name}`;
+                label.querySelector('input').addEventListener('change', (e) => {
+                    if(e.target.checked) state.owned.push(film.id);
+                    else state.owned = state.owned.filter(id => id !== film.id);
+                    save();
+                });
+                container.appendChild(label);
+            });
+        });
+    }
+
+    function renderCustom() {
+        const div = document.getElementById('customDisplay');
+        div.innerHTML = '';
+        ['killers', 'locations', 'girls'].forEach(type => {
+            state.custom[type].forEach((name, i) => {
+                div.innerHTML += `<div class="custom-item">
+                    <span><strong>${type.toUpperCase()}:</strong> ${name}</span>
+                    <span class="delete-btn" onclick="removeCustom('${type}', ${i})">REMOVE</span>
+                </div>`;
+            });
+        });
+    }
+
+    function addCustom() {
+        const name = document.getElementById('customName').value.trim();
+        const type = document.getElementById('customType').value;
+        if(name) {
+            state.custom[type].push(name);
+            document.getElementById('customName').value = '';
+            renderCustom();
+            save();
+        }
+    }
+
+    function removeCustom(type, i) {
+        state.custom[type].splice(i, 1);
+        renderCustom();
+        save();
+    }
+
+    function roll() {
+        let pool = { killers: [], locations: [], girls: [] };
+
+        // Add defaults based on selection
+        Object.keys(data).forEach(key => {
+            data[key].forEach(film => {
+                if(state.owned.includes(film.id)) {
+                    film.killers.forEach(k => pool.killers.push({name: k, from: film.name}));
+                    film.locations.forEach(l => pool.locations.push({name: l, from: film.name}));
+                    film.girls.forEach(g => pool.girls.push({name: g, from: film.name}));
+                }
+            });
+        });
+
+        // Add customs
+        state.custom.killers.forEach(k => pool.killers.push({name: k, from: "Custom Content"}));
+        state.custom.locations.forEach(l => pool.locations.push({name: l, from: "Custom Content"}));
+        state.custom.girls.forEach(g => pool.girls.push({name: g, from: "Custom Content"}));
+
+        const pick = (arr) => arr.length ? arr[Math.floor(Math.random() * arr.length)] : {name: "N/A", from: "Check settings"};
+
+        const k = pick(pool.killers);
+        const l = pick(pool.locations);
+        const g = pick(pool.girls);
+
+        // Update UI
+        updateEl('resKiller', 'oriKiller', k);
+        updateEl('resLocation', 'oriLocation', l);
+        updateEl('resGirl', 'oriGirl', g);
+    }
+
+    function updateEl(valId, oriId, obj) {
+        const valEl = document.getElementById(valId);
+        const oriEl = document.getElementById(oriId);
+        
+        // Flicker effect
+        valEl.style.opacity = 0;
+        setTimeout(() => {
+            valEl.innerText = obj.name;
+            oriEl.innerText = "🎬 " + obj.from;
+            valEl.style.opacity = 1;
+        }, 150);
+    }
+
+    document.getElementById('main-btn').addEventListener('click', roll);
+
+    // Init
+    renderCheckboxes();
+    renderCustom();
+</script>
+
+</body>
+</html>
