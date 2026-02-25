@@ -129,7 +129,7 @@
         const update = (idV, idO, idS, obj) => {
             document.getElementById(idV).innerText = obj.n;
             document.getElementById(idO).innerText = "🎬 " + obj.f;
-            document.getElementById(idS).innerText = obj.s ? "SEASON " + obj.s : "";
+            document.getElementById(idS).innerText = obj.s ? obj.s : "";
         };
         update('resK', 'oriK', 'seaK', k); update('resL', 'oriL', 'seaL', l); update('resG', 'oriG', 'seaG', g);
     }
