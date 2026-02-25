@@ -28,5 +28,9 @@
     { "id": "v_birds", "name": "Terror from Above", "season": "1 Vignette", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
     { "id": "v_zombies", "name": "Terror from the Grave", "season": "2 Vignette", "killers": ["Zombies"], "locations": [], "girls": [] },
     { "id": "v_destiny", "name": "Terror From Destiny", "season": "3 Vignette", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
+  ],
+  "Premium Promos": [
+    { "id": "pp_julie", "name": "Julie", "season": "premium promo", "killers": [], "locations": [], "girls": ["Julie"] },
+    { "id": "pp_meg", "name": "Meg", "season": "premium promo", "killers": [], "locations": [], "girls": ["Meg"] }
   ]
 }
