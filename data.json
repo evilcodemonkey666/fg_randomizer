@@ -29,8 +29,8 @@
     { "id": "v_zombies", "name": "Terror from the Grave", "season": "SEASON 2 Vignette", "killers": ["Zombies"], "locations": [], "girls": [] },
     { "id": "v_destiny", "name": "Terror From Destiny", "season": "SEASON 3 Vignette", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
   ],
-  "Premium Promos": [
-    { "id": "pp_julie", "name": "Julie", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Julie"] },
-    { "id": "pp_meg", "name": "Meg", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Meg"] }
+  "Premium Promos / Special Guests": [
+    { "id": "ps_julie", "name": "Julie", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Julie"] },
+    { "id": "ps_meg", "name": "Meg", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Meg"] }
   ]
 }
