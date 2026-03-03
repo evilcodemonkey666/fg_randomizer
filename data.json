@@ -29,8 +29,18 @@
     { "id": "v_zombies", "name": "Terror from the Grave", "season": "SEASON 2 Vignette", "killers": ["Zombies"], "locations": [], "girls": [] },
     { "id": "v_destiny", "name": "Terror From Destiny", "season": "SEASON 3 Vignette", "killers": ["Destiny"], "locations": [], "girls": ["Gabrielle"] }
   ],
-  "Premium Promos / Special Guests": [
-    { "id": "ps_julie", "name": "Julie", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Julie"] },
-    { "id": "ps_meg", "name": "Meg", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Meg"] }
+  "Final Girls Only": [
+    { "id": "sg_agnes", "name": "Agnes", "season": "Guest Star", "killers": [], "locations": [], "girls": ["Agnes"] },
+    { "id": "sg_jamie", "name": "Jamie", "season": "Guest Star", "killers": [], "locations": [], "girls": ["Grandma"] },
+    { "id": "sg_layla", "name": "Layla", "season": "Guest Star", "killers": [], "locations": [], "girls": ["Layla"] },
+    { "id": "sg_Paula", "name": "Paula", "season": "Guest Star", "killers": [], "locations": [], "girls": ["Paula"] },
+    { "id": "sg_constance", "name": "Constance", "season": "Dark Quarter", "killers": [], "locations": [], "girls": ["Constance"] },
+    { "id": "sg_julia", "name": "Julia", "season": "Dark Quarter", "killers": [], "locations": [], "girls": ["Julia"] },
+    { "id": "sg_carolyn", "name": "Carolyn's Revenge", "season": "Character Pack", "killers": [], "locations": [], "girls": ["Carolyn"] },
+    { "id": "sg_elizabeth", "name": "Elizabeth's Rebellion", "season": "Character Pack", "killers": [], "locations": [], "girls": ["Elizabeth"] },
+    { "id": "sg_grandma", "name": "Grandma's Grudge", "season": "Character Pack", "killers": [], "locations": [], "girls": ["Grandma"] },
+    { "id": "sg_ursula", "name": "Ursula's Faith", "season": "Character Pack", "killers": [], "locations": [], "girls": ["Ursula"] },
+    { "id": "sg_julie", "name": "Julie", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Julie"] },
+    { "id": "sg_meg", "name": "Meg", "season": "Premium Promo", "killers": [], "locations": [], "girls": ["Meg"] }
   ]
 }
