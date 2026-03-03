@@ -3,42 +3,154 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FG Randomizer</title>
+    <title>Final Girl Randomizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nosifer&family=Roboto:wght@400;900&display=swap" rel="stylesheet">
     <style>
-        .tooltip {
-            position: relative;
-            display: inline-block;
-            cursor: pointer;
-        }
-        .tooltip .tooltiptext {
-            visibility: hidden;
-            width: 120px;
-            background-color: black;
-            color: #fff;
-            text-align: center;
-            border-radius: 6px;
-            padding: 5px 0;
-            position: absolute;
-            z-index: 1;
-            bottom: 125%;
-            left: 50%;
-            margin-left: -60px;
-            opacity: 0;
-            transition: opacity 0.3s;
-        }
-        .tooltip:hover .tooltiptext {
-            visibility: visible;
-            opacity: 1;
-        }
+        :root { --blood: #8b0000; --bright: #ff4d4d; --bg: #0d0d0d; --card: #1a1a1a; --gold: #ffd700; }
+        body { font-family: 'Roboto', sans-serif; background: var(--bg); color: white; margin: 0; padding: 10px; display: flex; flex-direction: column; align-items: center; }
+        .container { max-width: 900px; width: 100%; }
+        h1 { font-family: 'Nosifer', cursive; color: var(--blood); text-align: center; margin: 20px 0; font-size: clamp(1.8rem, 5vw, 2.8rem); text-shadow: 3px 3px 0px #000; }
+
+        .global-controls { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+        .btn-sm { background: #222; color: #aaa; border: 1px solid #444; padding: 6px 12px; cursor: pointer; border-radius: 4px; font-size: 0.75rem; font-weight: bold; transition: 0.2s; }
+        .btn-sm:hover { border-color: var(--bright); color: white; }
+
+        .results { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 15px; margin-bottom: 25px; }
+        .card { background: var(--card); border: 2px solid var(--blood); border-radius: 12px; padding: 20px; text-align: center; box-shadow: 0 10px 30px rgba(0,0,0,0.7); position: relative; }
+        .card i { font-size: 2.2rem; display: block; margin-bottom: 10px; opacity: 0.8; }
+        .val { font-size: 1.6rem; font-weight: 900; color: var(--bright); margin: 5px 0; min-height: 1.9rem; }
+        .origin { font-size: 0.8rem; color: var(--gold); text-transform: uppercase; font-weight: bold; min-height: 1rem; }
+        .season-tag { font-size: 0.7rem; color: #888; display: block; margin-top: 4px; }
+
+        #roll-btn { background: var(--blood); color: white; border: none; width: 100%; padding: 20px; font-size: 1.6rem; font-weight: 900; border-radius: 8px; cursor: pointer; margin-bottom: 30px; letter-spacing: 2px; box-shadow: 0 5px 15px rgba(0,0,0,0.5); transition: 0.2s; }
+        #roll-btn:hover { background: var(--bright); transform: translateY(-2px); }
+
+        details { background: var(--card); border: 1px solid #222; margin-bottom: 8px; border-radius: 6px; }
+        summary { padding: 15px; cursor: pointer; font-weight: 900; display: flex; align-items: center; background: #222; border-radius: 6px; list-style: none; }
+        summary::-webkit-details-marker { display: none; }
+        .summary-content { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-left: 5px; }
+        
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 10px; padding: 15px; background: #111; border-top: 1px solid #333; }
+        .item { display: flex; align-items: center; font-size: 0.85rem; background: #1a1a1a; padding: 10px; border-radius: 4px; cursor: pointer; border: 1px solid transparent; position: relative; }
+        .item:hover { border-color: #444; }
+        .item input { margin-right: 12px; transform: scale(1.2); accent-color: var(--bright); }
+        
+        /* Tooltip Styles */
+        .item .tooltip-text { visibility: hidden; background-color: #222; color: var(--bright); text-align: left; border-radius: 6px; padding: 8px; position: absolute; z-index: 1000; bottom: 125%; left: 50%; transform: translateX(-50%); width: 220px; font-size: 0.7rem; border: 1px solid var(--bright); box-shadow: 0 5px 15px rgba(0,0,0,0.8); white-space: normal; line-height: 1.3; opacity: 0; transition: opacity 0.2s; pointer-events: none; }
+        .item .tooltip-text::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -5px; border-width: 5px; border-style: solid; border-color: #222 transparent transparent transparent; }
+        .item:hover .tooltip-text { visibility: visible; opacity: 1; }
+        
+        .tooltip-line { margin: 4px 0; font-size: 0.65rem; }
+        .tooltip-label { color: var(--gold); font-weight: bold; display: inline; }
+        .tooltip-value { display: inline; }
     </style>
 </head>
 <body>
-    <h1>FG Randomizer</h1>
-    <div class="tooltip">Killers<span class="tooltiptext">Description of killers</span></div>
-    <div class="tooltip">Locations<span class="tooltiptext">Description of locations</span></div>
-    <div class="tooltip">Girls<span class="tooltiptext">Description of girls</span></div>
-    <script>
-        // Implementing a basic hover functionality to show tooltips
-    </script>
+
+<div class="container">
+    <h1>FINAL GIRL</h1>
+
+    <div class="results">
+        <div class="card"><i>🔪</i><div class="origin" id="oriK">Killer</div><div class="val" id="resK">READY?</div><span class="season-tag" id="seaK"></span></div>
+        <div class="card"><i>🏚️</i><div class="origin" id="oriL">Location</div><div class="val" id="resL">READY?</div><span class="season-tag" id="seaL"></span></div>
+        <div class="card"><i>🩸</i><div class="origin" id="oriG">Final Girl</div><div class="val" id="resG">READY?</div><span class="season-tag" id="seaG"></span></div>
+    </div>
+
+    <button id="roll-btn">GENERATE SCENARIO</button>
+
+    <div class="global-controls">
+        <button class="btn-sm" onclick="globalSelect(true)">SELECT ALL</button>
+        <button class="btn-sm" onclick="globalSelect(false)">DESELECT ALL</button>
+        <button class="btn-sm" onclick="globalExpand(true)">EXPAND ALL</button>
+        <button class="btn-sm" onclick="globalExpand(false)">COLLAPSE ALL</button>
+    </div>
+
+    <div id="dynamic-sections"></div>
+</div>
+
+<script>
+    let filmData = {};
+    let state = JSON.parse(localStorage.getItem('fg_final_v7')) || { owned: [] };
+
+    async function loadData() {
+        try {
+            const response = await fetch('data.json');
+            if (!response.ok) throw new Error("Could not find data.json");
+            filmData = await response.json();
+            render();
+        } catch (e) {
+            document.getElementById('dynamic-sections').innerHTML = `<p style="color:red; text-align:center;">Error: ${e.message}</p>`;
+        }
+    }
+
+    function render() {
+        const container = document.getElementById('dynamic-sections');
+        container.innerHTML = '';
+        Object.keys(filmData).forEach(group => {
+            const det = document.createElement('details');
+            det.open = true;
+            det.innerHTML = `
+                <summary><div class="summary-content"><span>${group}</span>
+                <div><button class="btn-sm" onclick="event.stopPropagation(); toggleSeries('${group}', true)">ALL</button>
+                <button class="btn-sm" onclick="event.stopPropagation(); toggleSeries('${group}', false)">NONE</button></div></div></summary>
+                <div class="grid">${filmData[group].map(f => {
+                    const killerList = f.killers && f.killers.length > 0 ? f.killers.join(', ') : 'None';
+                    const locationList = f.locations && f.locations.length > 0 ? f.locations.join(', ') : 'None';
+                    const girlsList = f.girls && f.girls.length > 0 ? f.girls.join(', ') : 'None';
+                    const tooltipContent = `<div class="tooltip-line"><span class="tooltip-label">Killers:</span> <span class="tooltip-value">${killerList}</span></div><div class="tooltip-line"><span class="tooltip-label">Locations:</span> <span class="tooltip-value">${locationList}</span></div><div class="tooltip-line"><span class="tooltip-label">Girls:</span> <span class="tooltip-value">${girlsList}</span></div>`;
+                    return `
+                    <label class="item"><input type="checkbox" ${state.owned.includes(f.id) ? 'checked' : ''} 
+                    onchange="toggleFilm('${f.id}', this.checked)"> ${f.name}<div class="tooltip-text">${tooltipContent}</div></label>`;
+                }).join('')}</div>`;
+            container.appendChild(det);
+        });
+    }
+
+    function toggleFilm(id, val) {
+        if(val) { if(!state.owned.includes(id)) state.owned.push(id); }
+        else { state.owned = state.owned.filter(fid => fid !== id); }
+        save();
+    }
+
+    function toggleSeries(group, val) {
+        filmData[group].forEach(f => {
+            state.owned = state.owned.filter(fid => fid !== f.id);
+            if(val) state.owned.push(f.id);
+        });
+        save(); render();
+    }
+
+    function globalSelect(val) {
+        state.owned = val ? Object.values(filmData).flat().map(f => f.id) : [];
+        save(); render();
+    }
+
+    function globalExpand(val) { document.querySelectorAll('details').forEach(d => d.open = val); }
+    function save() { localStorage.setItem('fg_final_v7', JSON.stringify(state)); }
+
+    function roll() {
+        let pool = { killers: [], locations: [], girls: [] };
+        Object.values(filmData).flat().forEach(f => {
+            if(state.owned.includes(f.id)) {
+                f.killers.forEach(n => pool.killers.push({ n, f: f.name, s: f.season }));
+                f.locations.forEach(n => pool.locations.push({ n, f: f.name, s: f.season }));
+                f.girls.forEach(n => pool.girls.push({ n, f: f.name, s: f.season }));
+            }
+        });
+
+        const pick = (arr) => arr.length ? arr[Math.floor(Math.random() * arr.length)] : { n: "---", f: "No Filter", s: "" };
+        const k = pick(pool.killers); const l = pick(pool.locations); const g = pick(pool.girls);
+
+        const update = (idV, idO, idS, obj) => {
+            document.getElementById(idV).innerText = obj.n;
+            document.getElementById(idO).innerText = "🎬 " + obj.f;
+            document.getElementById(idS).innerText = obj.s ? obj.s : "";
+        };
+        update('resK', 'oriK', 'seaK', k); update('resL', 'oriL', 'seaL', l); update('resG', 'oriG', 'seaG', g);
+    }
+
+    document.getElementById('roll-btn').onclick = roll;
+    loadData();
+</script>
 </body>
 </html>
