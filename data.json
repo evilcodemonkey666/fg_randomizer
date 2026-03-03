@@ -22,7 +22,7 @@
   ],
   "Special Feature Films": [
     { "id": "sp_krampus", "name": "North Pole Nightmare", "season": "Special", "killers": ["Krampus"], "locations": ["Santa's Village"], "girls": ["Mrs. Claus", "Cindy"] },
-    { "id": "sp_shriek", "name": Shriek", "season": "Special", "killers": ["The Face"], "locations": ["Oakhaven"], "girls": ["Sidney", "Gale"] }
+    { "id": "sp_shriek", "name": "Shriek", "season": "Special", "killers": ["The Face"], "locations": ["Oakhaven"], "girls": ["Sidney", "Gale"] }
   ],
   "Special Vignettes": [
     { "id": "v_birds", "name": "Terror from Above", "season": "SEASON 1 Vignette", "killers": ["The Birds"], "locations": [], "girls": ["Melanie"] },
